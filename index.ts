@@ -9,9 +9,21 @@ const server = Bun.serve({
         {
             return new Response("About")
         }
-        return new Response("404!!!");
+        if(url.pathname ==="/feed")
+        {
+            throw new Error("Loading failed")
+        }
+        return new Response(Bun.file('./err.txt'));
     },
-  
+    error(err){
+        return new Response(`<pre> ${err} \n ${err.stack} </pre>`,{
+            headers:{
+                "Content-Type":"text/html"
+            }
+        })
+    },
     // Optional port number - the default value is 3000
     port: process.env.PORT || 3000,
+    
   });
+  console.log(`Listen on Port ${server.port}`);
