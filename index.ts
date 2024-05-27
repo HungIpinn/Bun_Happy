@@ -13,7 +13,7 @@ const server = Bun.serve({
         {
             throw new Error("Loading failed")
         }
-        return new Response(Bun.file('./err.txt'));
+        return new Response(Bun.file('./err.txt')); 
     },
     error(err){
         return new Response(`<pre> ${err} \n ${err.stack} </pre>`,{
